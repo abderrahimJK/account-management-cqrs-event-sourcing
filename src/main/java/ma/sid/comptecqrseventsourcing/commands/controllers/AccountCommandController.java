@@ -46,7 +46,7 @@ public class AccountCommandController {
     }
 
     @PutMapping("/debit")
-    public CompletableFuture<String> debitAccount(DebitedAccountRequestDTO requestDTO){
+    public CompletableFuture<String> debitAccount(@RequestBody DebitedAccountRequestDTO requestDTO){
         return commandGateway.send(new DebitAccountCommand(
                 requestDTO.getAccountID(),
                 requestDTO.getAmount(),

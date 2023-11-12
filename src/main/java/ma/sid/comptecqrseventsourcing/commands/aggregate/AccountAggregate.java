@@ -37,8 +37,8 @@ public class AccountAggregate {
         AggregateLifecycle.apply(new AccountCreatedEvent(
                 command.getId(),
                 command.getInitialBalance(),
-                command.getCurrency()
-        ));
+                command.getCurrency(),
+                AccountStatus.CREATED));
     }
     @EventSourcingHandler
     public void on(AccountCreatedEvent event){
@@ -67,8 +67,8 @@ public class AccountAggregate {
         AggregateLifecycle.apply(new AccountCreditedEvent(
                 creditAccountCommand.getId(),
                 creditAccountCommand.getAmount(),
-                creditAccountCommand.getCurrency()
-        ));
+                creditAccountCommand.getCurrency(),
+                new Date()));
     }
 
     @EventSourcingHandler
