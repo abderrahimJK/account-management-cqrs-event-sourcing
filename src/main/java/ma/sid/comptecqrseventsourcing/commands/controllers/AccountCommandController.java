@@ -3,8 +3,10 @@ package ma.sid.comptecqrseventsourcing.commands.controllers;
 import lombok.AllArgsConstructor;
 import ma.sid.comptecqrseventsourcing.commonapi.DTOs.CreateAccountRequestDTO;
 import ma.sid.comptecqrseventsourcing.commonapi.DTOs.CreditAccountRequestDTO;
+import ma.sid.comptecqrseventsourcing.commonapi.DTOs.DebitedAccountRequestDTO;
 import ma.sid.comptecqrseventsourcing.commonapi.commands.CreateAccountCommand;
 import ma.sid.comptecqrseventsourcing.commonapi.commands.CreditAccountCommand;
+import ma.sid.comptecqrseventsourcing.commonapi.commands.DebitAccountCommand;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,15 @@ public class AccountCommandController {
                 creditAccountRequestDTO.getAccountID(),
                 creditAccountRequestDTO.getAmount(),
                 creditAccountRequestDTO.getCurrency()
+        ));
+    }
+
+    @PutMapping("/debit")
+    public CompletableFuture<String> debitAccount(DebitedAccountRequestDTO requestDTO){
+        return commandGateway.send(new DebitAccountCommand(
+                requestDTO.getAccountID(),
+                requestDTO.getAmount(),
+                requestDTO.getCurrency()
         ));
     }
 

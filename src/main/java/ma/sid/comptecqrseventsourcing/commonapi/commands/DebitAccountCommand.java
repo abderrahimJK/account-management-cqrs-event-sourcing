@@ -1,5 +1,8 @@
 package ma.sid.comptecqrseventsourcing.commonapi.commands;
 
+import lombok.Getter;
+
+@Getter
 public class DebitAccountCommand extends BaseCommand<String>{
 
     private double amount;
